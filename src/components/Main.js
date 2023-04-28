@@ -1,11 +1,13 @@
-import React, {useState}  from "react";
+import React from "react";
 import api from "../utils/Api";
-import "../index.css"
+import "../index.css";
+import Card from "./Card";
 
 const Main = (props) => {
-  const [userName, setUserName] = useState("");
-  const [userDescription, setUserDescription] = useState("");
-  const [userAvatar, setUserAvatar] = useState("");
+  const [userName, setUserName] = React.useState("");
+  const [userDescription, setUserDescription] = React.useState("");
+  const [userAvatar, setUserAvatar] = React.useState("");
+  const [cards, setCards] = React.useState(null);
 
   React.useEffect(() => {
     api.getProfileInfo().then((res) => {
@@ -13,6 +15,10 @@ const Main = (props) => {
       setUserDescription(res.about);
       setUserAvatar(res.avatar);
     });
+  }, []);
+
+  React.useEffect(() => {
+    api.getAllCards().then((cards) => setCards(cards));
   }, []);
 
   return (
@@ -44,7 +50,11 @@ const Main = (props) => {
         ></button>
       </section>
       <section className="content">
-        <ul className="foto"></ul>
+        <ul className="foto">
+          {cards?.map((card) => (
+            <Card data={card} onCardImageClick={props.setSelectedCard} />
+          ))}
+        </ul>
       </section>
     </main>
   );

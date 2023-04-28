@@ -2,15 +2,15 @@ import "../index.css";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
-import { useState } from "react";
+import React from "react";
 import PopupWithForm from "./PopupWithForm";
-import Card from "./Card";
 import ImagePopup from "./ImagePopup";
 
 function App() {
-  const [isOpenPopupProfile, setOpenedPopupProfile] = useState(false);
-  const [isOpenPopupAvatar, setOpenedPopupAvatar] = useState(false);
-  const [isOpenPopupNewCard, setOpenedPopupNewCard] = useState(false);
+  const [isOpenPopupProfile, setOpenedPopupProfile] = React.useState(false);
+  const [isOpenPopupAvatar, setOpenedPopupAvatar] = React.useState(false);
+  const [isOpenPopupNewCard, setOpenedPopupNewCard] = React.useState(false);
+  const [selectedCard, setSelectedCard] = React.useState(null);
 
   function handleProfileClick() {
     setOpenedPopupProfile(true);
@@ -28,13 +28,8 @@ function App() {
     setOpenedPopupNewCard(false);
     setOpenedPopupAvatar(false);
     setOpenedPopupProfile(false);
-    //handleCardClick(false);
+    setSelectedCard(false);
   }
-
-  const [selectedCard, handleCardClick] = useState("");
-
- 
-
 
   return (
     <div className="main">
@@ -44,8 +39,8 @@ function App() {
           openProfilePopup={handleProfileClick}
           openAvatarPopup={handleAvatarClick}
           openNewCardPopup={handleNewCardClick}
+          setSelectedCard = {setSelectedCard}
         />
-        <Card onCardClick = {handleCardClick} />
         <Footer />
         <PopupWithForm
           name="profile"

@@ -1,10 +1,11 @@
-import React from "react";
-
-const ImagePopup = (props) => {
+const ImagePopup = ({ card, isOpen, onClose }) => {
+  if (!card) {
+    return null;
+  }
   return (
     <div
       className={`popup popup_dark popup_bigphoto ${
-        props.isOpen ? "popup_opened" : ""
+        isOpen ? "popup_opened" : ""
       }`}
     >
       <figure className="popup__figure">
@@ -12,9 +13,10 @@ const ImagePopup = (props) => {
           aria-label="кнопка закрытия всплывающего окна."
           className="popup__close-button"
           type="button"
+          onClick={onClose}
         ></button>
-        <img className="popup__photo" src={props.link} />
-        <figcaption className="popup__photo-name">{props.name}</figcaption>
+        <img className="popup__photo" src={card.link} />
+        <figcaption className="popup__photo-name">{card.name}</figcaption>
       </figure>
     </div>
   );

@@ -1,4 +1,3 @@
-import React from "react";
 import headerLogo from "../images/logo/logo-white.svg"
 
 
