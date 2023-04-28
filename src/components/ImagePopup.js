@@ -1,7 +1,4 @@
 const ImagePopup = ({ card, isOpen, onClose }) => {
-  if (!card) {
-    return null;
-  }
   return (
     <div
       className={`popup popup_dark popup_bigphoto ${
@@ -14,9 +11,9 @@ const ImagePopup = ({ card, isOpen, onClose }) => {
           className="popup__close-button"
           type="button"
           onClick={onClose}
-        ></button>
-        <img className="popup__photo" src={card.link} />
-        <figcaption className="popup__photo-name">{card.name}</figcaption>
+        />
+        <img className="popup__photo" src={card?.link} alt={card?.name} />
+        <figcaption className="popup__photo-name">{card?.name}</figcaption>
       </figure>
     </div>
   );

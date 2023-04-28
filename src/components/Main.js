@@ -10,15 +10,21 @@ const Main = (props) => {
   const [cards, setCards] = React.useState(null);
 
   React.useEffect(() => {
-    api.getProfileInfo().then((res) => {
-      setUserName(res.name);
-      setUserDescription(res.about);
-      setUserAvatar(res.avatar);
-    });
+    api
+      .getProfileInfo()
+      .then((res) => {
+        setUserName(res.name);
+        setUserDescription(res.about);
+        setUserAvatar(res.avatar);
+      })
+      .catch((error) => console.log(`Произошла ${error}: ${error.massage}`));
   }, []);
 
   React.useEffect(() => {
-    api.getAllCards().then((cards) => setCards(cards));
+    api
+      .getAllCards()
+      .then((cards) => setCards(cards))
+      .catch((error) => console.log(`Произошла ${error}: ${error.massage}`));
   }, []);
 
   return (
@@ -51,8 +57,12 @@ const Main = (props) => {
       </section>
       <section className="content">
         <ul className="foto">
-          {cards?.map((card) => (
-            <Card data={card} onCardImageClick={props.setSelectedCard} />
+          {cards?.map((card, _id) => (
+            <Card
+              data={card}
+              key={_id}
+              onCardImageClick={props.setSelectedCard}
+            />
           ))}
         </ul>
       </section>

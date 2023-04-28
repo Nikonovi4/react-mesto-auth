@@ -7,28 +7,28 @@ import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
 
 function App() {
-  const [isOpenPopupProfile, setOpenedPopupProfile] = React.useState(false);
-  const [isOpenPopupAvatar, setOpenedPopupAvatar] = React.useState(false);
-  const [isOpenPopupNewCard, setOpenedPopupNewCard] = React.useState(false);
+  const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(null);
+  const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(null);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(null);
   const [selectedCard, setSelectedCard] = React.useState(null);
 
   function handleProfileClick() {
-    setOpenedPopupProfile(true);
+    setIsEditProfilePopupOpen(true);
   }
 
   function handleAvatarClick() {
-    setOpenedPopupAvatar(true);
+    setIsEditAvatarPopupOpen(true);
   }
 
   function handleNewCardClick() {
-    setOpenedPopupNewCard(true);
+    setIsAddPlacePopupOpen(true);
   }
 
   function closeAllPopoups() {
-    setOpenedPopupNewCard(false);
-    setOpenedPopupAvatar(false);
-    setOpenedPopupProfile(false);
-    setSelectedCard(false);
+    setIsAddPlacePopupOpen(null);
+    setIsEditAvatarPopupOpen(null);
+    setIsEditProfilePopupOpen(null);
+    setSelectedCard(null);
   }
 
   return (
@@ -46,7 +46,7 @@ function App() {
           name="profile"
           title="Редактировать профиль"
           buttonText="Сохранить"
-          isOpen={isOpenPopupProfile}
+          isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopoups}
         >
           <label>
@@ -78,7 +78,7 @@ function App() {
           name="add-photo"
           title="Новое место"
           buttonText="Сохранить"
-          isOpen={isOpenPopupNewCard}
+          isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopoups}
         >
           <label>
@@ -108,7 +108,7 @@ function App() {
           name="newavatar"
           title="Обновить аватар?"
           buttonText="Сохранить"
-          isOpen={isOpenPopupAvatar}
+          isOpen={isEditAvatarPopupOpen}
           onClose={closeAllPopoups}
         >
           <label>
