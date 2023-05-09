@@ -54,25 +54,39 @@ class Api {
     }).then(this._checkResponse);
   }
 
-  likedPhoto(cardId) {
-    return fetch(`${this._url}cards/${cardId}/likes`, {
-      method: "PUT",
-      headers: this._headers,
-    }).then(this._checkResponse);
-  }
+  // likedPhoto(cardId) {
+  //   return fetch(`${this._url}cards/${cardId}/likes`, {
+  //     method: "PUT",
+  //     headers: this._headers,
+  //   }).then(this._checkResponse);
+  // }
 
-  dislikedPhoto(cardId) {
-    return fetch(`${this._url}cards/${cardId}/likes`, {
-      method: "DELETE",
-      headers: this._headers,
-    }).then(this._checkResponse);
-  }
+  // dislikedPhoto(cardId) {
+  //   return fetch(`${this._url}cards/${cardId}/likes`, {
+  //     method: "DELETE",
+  //     headers: this._headers,
+  //   }).then(this._checkResponse);
+  // }
 
   removeCard(cardId) {
     return fetch(`${this._url}cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
     }).then(this._checkResponse);
+  }
+
+  changeLikeCardStatus(cardId, isLiked) {
+    if (isLiked) {
+      return fetch(`${this._url}cards/${cardId}/likes`, {
+        method: "DELETE",
+        headers: this._headers,
+      }).then(this._checkResponse);
+    } else {
+      return fetch(`${this._url}cards/${cardId}/likes`, {
+        method: "PUT",
+        headers: this._headers,
+      }).then(this._checkResponse);
+    }
   }
 }
 

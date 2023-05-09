@@ -1,58 +1,45 @@
 import React from "react";
-import api from "../utils/Api";
 import "../index.css";
 import Card from "./Card";
+import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
-const Main = (props) => {
-  const [userName, setUserName] = React.useState("");
-  const [userDescription, setUserDescription] = React.useState("");
-  const [userAvatar, setUserAvatar] = React.useState("");
-  const [cards, setCards] = React.useState(null);
-
-  React.useEffect(() => {
-    api
-      .getProfileInfo()
-      .then((res) => {
-        setUserName(res.name);
-        setUserDescription(res.about);
-        setUserAvatar(res.avatar);
-      })
-      .catch((error) => console.log(`Произошла ${error}: ${error.massage}`));
-  }, []);
-
-  React.useEffect(() => {
-    api
-      .getAllCards()
-      .then((cards) => setCards(cards))
-      .catch((error) => console.log(`Произошла ${error}: ${error.massage}`));
-  }, []);
+const Main = ({
+  openProfilePopup,
+  openAvatarPopup,
+  openNewCardPopup,
+  setSelectedCard,
+  cards,
+  onCardLike,
+  onCardDelete,
+}) => {
+  const userInfo = React.useContext(CurrentUserContext);
 
   return (
     <main>
       <section className="profile lead">
         <div className="cover">
           <img
-            src={userAvatar}
+            src={userInfo.avatar}
             className="profile__foto"
             alt="аватар профиля"
-            onClick={props.openAvatarPopup}
+            onClick={openAvatarPopup}
           />
         </div>
         <div className="profile__name-edit">
-          <h1 className="profile__name">{userName}</h1>
+          <h1 className="profile__name">{userInfo.name}</h1>
           <button
-            onClick={props.openProfilePopup}
+            onClick={openProfilePopup}
             aria-label="кнопка редактирования профиля."
             className="profile__edit-button"
             type="button"
           ></button>
         </div>
-        <p className="profile__activity">{userDescription}</p>
+        <p className="profile__activity">{userInfo.about}</p>
         <button
           aria-label="кнопка добавления фотографий."
           className="profile__add-content-button"
           type="button"
-          onClick={props.openNewCardPopup}
+          onClick={openNewCardPopup}
         ></button>
       </section>
       <section className="content">
@@ -61,7 +48,9 @@ const Main = (props) => {
             <Card
               data={card}
               key={_id}
-              onCardImageClick={props.setSelectedCard}
+              onCardImageClick={setSelectedCard}
+              onCardLike={onCardLike}
+              onCardDelete={onCardDelete}
             />
           ))}
         </ul>

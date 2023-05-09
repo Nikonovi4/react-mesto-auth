@@ -5,6 +5,7 @@ const PopupWithForm = ({
   buttonText,
   isOpen,
   children,
+  onSubmit,
 }) => {
   return (
     <div className={`popup popup_${name} ${isOpen ? "popup_opened" : ""}`}>
@@ -15,7 +16,11 @@ const PopupWithForm = ({
           type="button"
           onClick={onClose}
         ></button>
-        <form name={`${name}`} className="popup__form popup__profile-edit">
+        <form
+          name={`${name}`}
+          className="popup__form popup__profile-edit"
+          onSubmit={onSubmit}
+        >
           <h2 className="popup__title">{`${title}`}</h2>
           <fieldset className="popup__fieldset">
             {children}
