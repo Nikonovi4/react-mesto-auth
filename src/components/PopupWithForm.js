@@ -26,7 +26,7 @@ const PopupWithForm = ({
             {children}
 
             <button className="popup__save" type="submit">
-              {buttonText}
+              {buttonText || "Сохранить"}
             </button>
           </fieldset>
         </form>

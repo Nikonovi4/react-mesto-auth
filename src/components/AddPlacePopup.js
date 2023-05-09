@@ -1,9 +1,14 @@
-import React from "react";
+import {useEffect, useState} from "react";
 import PopupWithForm from "./PopupWithForm";
 
 const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
-  const [nameNewCard, setNameNewCard] = React.useState("");
-  const [linkNewCard, setLinkNewCard] = React.useState("");
+  const [nameNewCard, setNameNewCard] = useState("");
+  const [linkNewCard, setLinkNewCard] = useState("");
+
+  useEffect(() => {
+    setNameNewCard("");
+    setLinkNewCard("");
+  }, [isOpen]);
 
   function handleInputNameCard(evt) {
     setNameNewCard(evt.target.value);
@@ -21,15 +26,12 @@ const AddPlacePopup = ({ isOpen, onClose, onAddPlace }) => {
       link: linkNewCard,
     });
 
-    setNameNewCard("");
-    setLinkNewCard("");
   }
 
   return (
     <PopupWithForm
       name="add-photo"
       title="Новое место"
-      buttonText="Сохранить"
       isOpen={isOpen}
       onClose={onClose}
       onSubmit={handleSubmit}

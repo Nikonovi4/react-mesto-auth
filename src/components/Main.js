@@ -44,10 +44,10 @@ const Main = ({
       </section>
       <section className="content">
         <ul className="foto">
-          {cards?.map((card, _id) => (
+          {cards?.map((card) => (
             <Card
               data={card}
-              key={_id}
+              key={card._id}
               onCardImageClick={setSelectedCard}
               onCardLike={onCardLike}
               onCardDelete={onCardDelete}

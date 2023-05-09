@@ -1,4 +1,4 @@
-import React, { useSyncExternalStore } from "react";
+import {useContext} from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const Card = ({ data, onCardImageClick, onCardLike, onCardDelete }) => {
@@ -6,7 +6,7 @@ const Card = ({ data, onCardImageClick, onCardLike, onCardDelete }) => {
     onCardImageClick(data);
   };
 
-  const userInfo = React.useContext(CurrentUserContext);
+  const userInfo = useContext(CurrentUserContext);
   const isOwenCard = data.owner._id === userInfo._id;
   const isLiked = data.likes.some((i) => i._id === userInfo._id);
   const cardLikeButtonClassName = `card__like ${
@@ -20,6 +20,8 @@ const Card = ({ data, onCardImageClick, onCardLike, onCardDelete }) => {
   const handleDeleteClick = () => {
     onCardDelete(data);
   };
+
+
 
   return (
     <ul className="foto">

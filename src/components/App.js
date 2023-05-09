@@ -1,25 +1,25 @@
 import "../index.css";
-import React from "react";
+import {useEffect, useState} from "react";
 import api from "../utils/Api";
 import Header from "./Header";
 import Main from "./Main";
 import Footer from "./Footer";
 import PopupWithForm from "./PopupWithForm";
 import ImagePopup from "./ImagePopup";
-import EditProfilePopup from "./EditPfofilePopup";
+import EditProfilePopup from "./EditProfilePopup";
 import EditAvatarPopup from "./EditAvatarPopup";
 import AddPlacePopup from "./AddPlacePopup";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] =
-    React.useState(null);
+    useState(null);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] =
-    React.useState(null);
-  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(null);
-  const [selectedCard, setSelectedCard] = React.useState(null);
-  const [userInfo, getCurrentUser] = React.useState("");
-  const [cards, setCards] = React.useState(null);
+    useState(null);
+  const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = useState(null);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [userInfo, getCurrentUser] = useState({});
+  const [cards, setCards] = useState(null);
 
   function handleProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -40,14 +40,14 @@ function App() {
     setSelectedCard(null);
   }
 
-  React.useEffect(() => {
+  useEffect(() => {
     api
       .getAllCards()
       .then((cards) => setCards(cards))
       .catch((error) => console.log(`Произошла ${error}: ${error.massage}`));
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     api
       .getProfileInfo()
       .then((info) => {
@@ -147,7 +147,6 @@ function App() {
     </div>
   );
 
-  //_________________________________
 }
 
 export default App;
