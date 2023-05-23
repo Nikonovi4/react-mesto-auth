@@ -1,0 +1,6 @@
+.welcome__inputs {
+  margin-top: 33px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}

@@ -1,6 +1,6 @@
 import headerLogo from "../images/logo/logo-white.svg";
 
-function Header() {
+function Header({ isUserEmail, buttonText, handleLogOut }) {
   return (
     <header className="header">
       <img
@@ -8,6 +8,12 @@ function Header() {
         src={headerLogo}
         alt="Место. Россия. Логотип."
       />
+      <div className="header__service">
+        <p className="header__email">{isUserEmail}</p>
+        <div className="header__button" onClick={handleLogOut}>
+          {buttonText}
+        </div>
+      </div>
     </header>
   );
 }

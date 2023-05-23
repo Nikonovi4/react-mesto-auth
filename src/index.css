@@ -52,9 +52,21 @@
 @import url(./blocks/popup/__container/_content/popup__container_new-avatar.css);
 @import url(./blocks/popup/__container/_content/popup__container_confirm.css);
 
-.main__content {
-    max-width: 1280px;
-    min-width: 320px;
-    margin-left: auto;
-    margin-right: auto;
-}
+@import url(./blocks/welcome/welcome.css);
+@import url(./blocks/welcome/__form/welcome__form.css);
+@import url(./blocks/welcome/__fieldset/welcome__fieldset.css);
+@import url(./blocks/welcome/__title/welcome__title.css);
+@import url(./blocks/welcome/__inputs/welcome__inputs.css);
+@import url(./blocks/welcome/__input/welcome__input.css);
+@import url(./blocks/welcome/__button/welcome__button.css);
+@import url(./blocks/welcome/__text/welcome__text.css);
+
+@import url(./blocks/header/__service/header__service.css);
+@import url(./blocks/header/__email/header__email.css);
+@import url(./blocks/header/__button/header__button.css);
+
+@import url(./blocks/tooltip/tooltip.css);
+@import url(./blocks/tooltip/__iqon/tooltip__iqon.css);
+@import url(./blocks/tooltip/__text/tooltip__text.css);
+
+@import url(./blocks/error/error.css);

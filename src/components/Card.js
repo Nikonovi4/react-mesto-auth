@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import { useContext } from "react";
 import { CurrentUserContext } from "../contexts/CurrentUserContext";
 
 const Card = ({ data, onCardImageClick, onCardLike, onCardDelete }) => {
@@ -20,8 +20,6 @@ const Card = ({ data, onCardImageClick, onCardLike, onCardDelete }) => {
   const handleDeleteClick = () => {
     onCardDelete(data);
   };
-
-
 
   return (
     <ul className="foto">

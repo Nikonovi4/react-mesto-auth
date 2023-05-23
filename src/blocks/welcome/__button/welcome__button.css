@@ -1,0 +1,22 @@
+.welcome__button {
+  height: 50px;
+  width: 358px;
+  border-radius: 2px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  border: none;
+  margin-top: 29vh;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  color: #000000;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+.welcome__button:hover {
+  opacity: 0.8;
+  transition: 0.3s;
+}

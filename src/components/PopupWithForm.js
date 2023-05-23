@@ -23,6 +23,7 @@ const PopupWithForm = ({
         >
           <h2 className="popup__title">{`${title}`}</h2>
           <fieldset className="popup__fieldset">
+            
             {children}
 
             <button className="popup__save" type="submit">
