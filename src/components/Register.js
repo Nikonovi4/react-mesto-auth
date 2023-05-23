@@ -2,17 +2,8 @@ import "../index.css";
 import Header from "./Header";
 import WecomeScrin from "./WelcomScrin";
 import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import InfoTooltip from "./InfoTooltip";
 
-const Register = ({ handleRegister }) => {
-  const [formValue, setFormValue] = useState({
-    email: "",
-    password: "",
-  });
-  const [errorMessage, setErrorMessage] = useState("");
-  const [isOpenTooltip, setOpenTooltip] = useState(null);
-  const [isSuccess, setSuccess] = useState(false);
+const Register = ({ onRegister, setFormValue, formValue, errorMessage}) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,22 +14,8 @@ const Register = ({ handleRegister }) => {
   };
 
   const handleSubmit = (e) => {
-    const { email, password } = formValue;
     e.preventDefault();
-    handleRegister(email, password)
-      .then(() => {
-        setSuccess(true);
-      })
-      .catch((e) => {
-        setErrorMessage(e);
-      })
-      .finally(() => {
-        setOpenTooltip(true);
-      });
-  };
-
-  const closeTooltip = () => {
-    setOpenTooltip(null);
+    onRegister();
   };
 
   return (
@@ -78,11 +55,6 @@ const Register = ({ handleRegister }) => {
           />
         </div>
       </WecomeScrin>
-      <InfoTooltip
-        isOpen={isOpenTooltip}
-        onClose={closeTooltip}
-        isSuccess={isSuccess}
-      />
     </div>
   );
 };

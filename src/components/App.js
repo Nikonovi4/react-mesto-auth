@@ -25,6 +25,12 @@ function App() {
   const [cards, setCards] = useState(null);
   const [isLogIn, setLogin] = useState(false);
   const [isUserEmail, setUserEmail] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isOpenTooltip, setOpenTooltip] = useState(null);
+  const [formValue, setFormValue] = useState({
+    email: "",
+    password: "",
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +38,7 @@ function App() {
       .getAllCards()
       .then((cards) => setCards(cards))
       .catch((error) => console.log(`Произошла ${error}: ${error.massage}`));
-  }, []);
+  }, [isLogIn]);
 
   useEffect(() => {
     api
@@ -41,7 +47,7 @@ function App() {
         getCurrentUser(info);
       })
       .catch((error) => console.log(`Произошла ${error}: ${error.massage}`));
-  }, []);
+  }, [isLogIn]);
 
   function handleProfileClick() {
     setIsEditProfilePopupOpen(true);
@@ -113,40 +119,60 @@ function App() {
 
   const checkToken = () => {
     const jwt = localStorage.getItem("jwt");
-    auth.getInfo(jwt).then((data) => {
-      if (data) {
-        setUserEmail(data.data.email);
-        setLogin(true);
-        navigate("/");
-      } else {
-        setLogin(false);
-      }
-    });
+    auth
+      .getInfo(jwt)
+      .then((data) => {
+        if (data) {
+          setUserEmail(data.data.email);
+          setLogin(true);
+          navigate("/");
+        } else {
+          setLogin(false);
+        }
+      })
+      .catch((error) => console.log(`Произошла ${error}: ${error.massage}`));
   };
 
   useEffect(() => {
     checkToken();
-  },[]);
-  
+  }, []);
 
-  const handleRegister = (email, password) => {
-    return auth.register(email, password).then((data) => {
-      navigate("/sign-up");
-    });
+  const handleRegister = () => {
+    const { email, password } = formValue;
+    auth
+      .register(email, password)
+      .then(() => {
+        navigate("/sign-up");
+      })
+      .catch((e) => {
+        setErrorMessage(e);
+        setOpenTooltip(true);
+      })
   };
 
-  const handleLogin = (email, password) => {
-    return auth.authorize(email, password).then((data) => {
-      localStorage.setItem("jwt", data.token);
-      setLogin(true);
-      navigate("/");
-    });
+  const handleLogin = () => {
+    const { email, password } = formValue;
+    auth
+      .authorize(email, password)
+      .then((data) => {
+        localStorage.setItem("jwt", data.token);
+        setLogin(true);
+        navigate("/");
+      })
+      .catch((e) => {
+        setErrorMessage(e);
+        setOpenTooltip(true);
+      })
   };
 
   const handleLogOut = () => {
-    localStorage.removeItem("jwt")
-    setLogin(false)
-    navigate("/sign-up")
+    localStorage.removeItem("jwt");
+    setLogin(false);
+    navigate("/sign-up");
+  };
+
+  function closeInfoTooltip(){
+    setOpenTooltip(null);
   }
 
   return (
@@ -175,11 +201,26 @@ function App() {
 
             <Route
               path="/sign-up"
-              element={<Login handleLogin={handleLogin} />}
+              element={
+                <Login
+                  handleLogin={handleLogin}
+                  setFormValue={setFormValue}
+                  formValue={formValue}
+                  onLogin={handleLogin}
+                  errorMessage={errorMessage}
+                />
+              }
             />
             <Route
               path="/sign-in"
-              element={<Register handleRegister={handleRegister} />}
+              element={
+                <Register
+                  onRegister={handleRegister}
+                  setFormValue={setFormValue}
+                  formValue={formValue}
+                  errorMessage={errorMessage}
+                />
+              }
             />
             <Route path="*" element={<h1>Страница не найдена</h1>} />
           </Routes>
@@ -205,7 +246,11 @@ function App() {
             isOpen={selectedCard}
             onClose={closeAllPopoups}
           />
-          <InfoTooltip isSuccess="false" />
+          <InfoTooltip
+            isOpen={isOpenTooltip}
+            onClose={closeInfoTooltip}
+            fallText="Что-то пошло не так! Попробуйте ещё раз."
+          />
         </div>
       </CurrentUserContext.Provider>
     </div>
