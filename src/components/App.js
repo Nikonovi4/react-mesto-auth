@@ -27,6 +27,7 @@ function App() {
   const [isUserEmail, setUserEmail] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [isOpenTooltip, setOpenTooltip] = useState(null);
+  const [isSuccess, setSuccess] = useState(false)
   const [formValue, setFormValue] = useState({
     email: "",
     password: "",
@@ -34,19 +35,19 @@ function App() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    api
+   if (Login) {api
       .getAllCards()
       .then((cards) => setCards(cards))
-      .catch((error) => console.log(`Произошла ${error}: ${error.massage}`));
+      .catch((error) => console.log(`Произошла ${error}: ${error.massage}`));}
   }, [isLogIn]);
 
   useEffect(() => {
-    api
+    if (Login) {api
       .getProfileInfo()
       .then((info) => {
         getCurrentUser(info);
       })
-      .catch((error) => console.log(`Произошла ${error}: ${error.massage}`));
+      .catch((error) => console.log(`Произошла ${error}: ${error.massage}`));}
   }, [isLogIn]);
 
   function handleProfileClick() {
@@ -143,9 +144,12 @@ function App() {
       .register(email, password)
       .then(() => {
         navigate("/sign-up");
+        setSuccess(true)
       })
       .catch((e) => {
         setErrorMessage(e);
+      })
+      .finally(() => {
         setOpenTooltip(true);
       })
   };
@@ -173,6 +177,7 @@ function App() {
 
   function closeInfoTooltip(){
     setOpenTooltip(null);
+    setSuccess(false)
   }
 
   return (
@@ -250,6 +255,8 @@ function App() {
             isOpen={isOpenTooltip}
             onClose={closeInfoTooltip}
             fallText="Что-то пошло не так! Попробуйте ещё раз."
+            successText="Вы успешно зарегистрировались!"
+            isSuccess={isSuccess}
           />
         </div>
       </CurrentUserContext.Provider>
