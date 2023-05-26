@@ -1,5 +1,13 @@
 .header__service {
-  display: flex;
+  display: none;
   gap: 24px;
   align-items: center;
+  margin-right: 27px;
+}
+
+@media screen and (min-width: 880px) {
+  .header__service {
+    display: flex;
+    margin-right: 0;
+  }
 }

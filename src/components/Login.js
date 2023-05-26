@@ -48,7 +48,7 @@ const Login = ({ onLogin, setFormValue, formValue, errorMessage }) => {
             placeholder="Пароль"
             className="welcome__input"
             name="password"
-            value={formValue.password}
+            value={formValue.passwordd}
             onChange={handleChange}
           />
         </div>

@@ -15,6 +15,7 @@ import Register from "./Register";
 import InfoTooltip from "./InfoTooltip";
 import { ProtectedRoute } from "./ProtectedRout";
 import * as auth from "../utils/Auth";
+import BurgerMenu from "./BuregerMenu";
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = useState(null);
@@ -136,7 +137,7 @@ function App() {
 
   useEffect(() => {
     checkToken();
-  }, []);
+  }, [isLogIn]);
 
   const handleRegister = () => {
     const { email, password } = formValue;
@@ -171,6 +172,7 @@ function App() {
 
   const handleLogOut = () => {
     localStorage.removeItem("jwt");
+    setUserEmail("")
     setLogin(false);
     navigate("/sign-up");
   };
@@ -180,8 +182,14 @@ function App() {
     setSuccess(false)
   }
 
+  const [isOpenMenu, setOpenMenu] = useState(false);
+  const openMenu = () => {
+    isOpenMenu? setOpenMenu(false) : setOpenMenu(true)
+  }
+
   return (
     <div className="main">
+      <BurgerMenu isUserEmail={isUserEmail} isOpen = {isOpenMenu}/>
       <CurrentUserContext.Provider value={userInfo}>
         <div className="main__content">
           <Routes>
@@ -200,6 +208,8 @@ function App() {
                   onCardDelete={handleCardDelete}
                   isUserEmail={isUserEmail}
                   handleLogOut={handleLogOut}
+                  isOpenMenu = {openMenu}
+                  isOpen = {isOpenMenu}
                 />
               }
             />

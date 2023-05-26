@@ -1,5 +1,5 @@
 .welcome__input {
-  width: 358px;
+  width: 80%;
   height: 40px;
   box-sizing: border-box;
   padding: 0;
@@ -12,8 +12,16 @@
   font-size: 14px;
   line-height: 17px;
   color: #cccccc;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .welcome__input:focus {
   outline: 2px solid #007dff;
+}
+
+@media screen and (min-width: 400px) {
+  .welcome__input {
+    width: 358px;
+  }
 }

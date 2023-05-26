@@ -1,6 +1,6 @@
 .welcome__button {
   height: 50px;
-  width: 358px;
+  width: 80%;;
   border-radius: 2px;
   font-style: normal;
   font-weight: 400;
@@ -19,4 +19,10 @@
 .welcome__button:hover {
   opacity: 0.8;
   transition: 0.3s;
+}
+
+@media screen and (min-width: 420px) {
+  .welcome__button {
+    width: 358px;
+  }
 }
