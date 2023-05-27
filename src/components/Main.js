@@ -13,8 +13,8 @@ const Main = ({
   onCardDelete,
   isUserEmail,
   handleLogOut,
-  isOpenMenu,
-  isOpen
+  openBurgerMenu,
+  isOpenMenu
 }) => {
   const userInfo = React.useContext(CurrentUserContext);
 
@@ -24,8 +24,8 @@ const Main = ({
         buttonText="Выход"
         isUserEmail={isUserEmail}
         handleLogOut={handleLogOut}
+        openBurgerMenu = {openBurgerMenu}
         isOpenMenu = {isOpenMenu}
-        isOpen = {isOpen}
       />
       <main>
         <section className="profile lead">

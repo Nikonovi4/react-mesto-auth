@@ -183,13 +183,13 @@ function App() {
   }
 
   const [isOpenMenu, setOpenMenu] = useState(false);
-  const openMenu = () => {
+  const openBurgerMenu = () => {
     isOpenMenu? setOpenMenu(false) : setOpenMenu(true)
   }
 
   return (
     <div className="main">
-      <BurgerMenu isUserEmail={isUserEmail} isOpen = {isOpenMenu}/>
+      <BurgerMenu isUserEmail={isUserEmail} isOpenMenu = {isOpenMenu}/>
       <CurrentUserContext.Provider value={userInfo}>
         <div className="main__content">
           <Routes>
@@ -208,8 +208,8 @@ function App() {
                   onCardDelete={handleCardDelete}
                   isUserEmail={isUserEmail}
                   handleLogOut={handleLogOut}
-                  isOpenMenu = {openMenu}
-                  isOpen = {isOpenMenu}
+                  openBurgerMenu = {openBurgerMenu}
+                  isOpenMenu = {isOpenMenu}
                 />
               }
             />
